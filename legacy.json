@@ -1,0 +1,34 @@
+[
+  {
+    "id": "legacy-1",
+    "platform": "youtube",
+    "title": "A quick sketch session — 30 minute warmup",
+    "date": "2025-03-15",
+    "link": "https://www.youtube.com/@bedsonfire/videos",
+    "content": "A 30-minute warmup sketch session.\n\nhttps://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600\n\nJust warming up with some quick gesture drawings."
+  },
+  {
+    "id": "legacy-2",
+    "platform": "instagram",
+    "title": "Finished a new Warhammer mini",
+    "date": "2025-02-20",
+    "link": "https://www.instagram.com/thebedsonfire/",
+    "content": "Finished painting this mini over the weekend. C&C welcome!"
+  },
+  {
+    "id": "legacy-3",
+    "platform": "tiktok",
+    "title": "Studio setup tour — what I use to paint",
+    "date": "2025-01-10",
+    "link": "https://www.tiktok.com/@stoppedmakingsense",
+    "content": "A quick tour of my painting setup and the tools I use daily."
+  },
+  {
+    "id": "legacy-4",
+    "platform": "youtube",
+    "title": "100% completing my favorite game",
+    "date": "2024-12-01",
+    "link": "https://www.youtube.com/@bedsonfire/videos",
+    "content": "The full journey of completing my favorite game from start to finish."
+  }
+]

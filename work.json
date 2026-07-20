@@ -1,0 +1,36 @@
+[
+  {
+    "id": "work-1",
+    "number": "01",
+    "year": "2025",
+    "label": "Miniatures & painting",
+    "title": "Warhammer",
+    "description": "My collection, paint progress, armies, and the stories behind them.",
+    "link": "#work",
+    "style": "sunrise",
+    "large": true
+  },
+  {
+    "id": "work-2",
+    "number": "02",
+    "year": "2024",
+    "label": "Sketchbooks & studies",
+    "title": "Drawings",
+    "description": "Finished pieces, experiments, studies, and everything between.",
+    "link": "#work",
+    "style": "moss",
+    "large": false
+  },
+  {
+    "id": "work-3",
+    "number": "03",
+    "year": "2024",
+    "label": "Videos & game logs",
+    "title": "YouTube & 100% Games",
+    "description": "Every video, completion journey, and game worth fully exploring.",
+    "link": "https://www.youtube.com/@bedsonfire/videos",
+    "style": "blue",
+    "large": false,
+    "quote": "The next try could be the one."
+  }
+]

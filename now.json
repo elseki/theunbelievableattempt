@@ -1,0 +1,23 @@
+[
+  {
+    "id": "now-1",
+    "category": "Learning",
+    "description": "How to make better bread without turning my kitchen into a science lab."
+  },
+  {
+    "id": "now-2",
+    "category": "Reading",
+    "description": "The Creative Act by Rick Rubin — slowly, pencil in hand.",
+    "italic": true
+  },
+  {
+    "id": "now-3",
+    "category": "Building",
+    "description": "A tiny tool that helps people preserve the moments they want to remember."
+  },
+  {
+    "id": "now-4",
+    "category": "Listening",
+    "description": "Long walks, short podcasts, and whatever friends press into my hands."
+  }
+]
