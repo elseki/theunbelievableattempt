@@ -307,6 +307,7 @@ function renderLegacy(platform) {
               badge +
               '<p class="legacy-title">' + cached.title + ' <small>' + l.date + '</small></p>' +
               (cached.author ? '<p class="legacy-yt-author">' + cached.author + '</p>' : '') +
+              body +
             '</div>' +
             '<span class="legacy-arrow" aria-hidden="true">\u2197</span>' +
           '</a>' +
