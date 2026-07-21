@@ -9,6 +9,38 @@
   let editingNowId = null;
   let editingLegacyId = null;
 
+  const OWNER = 'elseki';
+  const REPO = 'theunbelievableattempt';
+
+  function gitHubToken() {
+    return localStorage.getItem('1ma_github_token') || '';
+  }
+
+  function commitFile(path, content, message) {
+    const token = gitHubToken();
+    if (!token) return;
+    const url = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + path;
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2) + '\n')));
+    fetch(url, { headers: { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github.v3+json' } })
+      .then(r => r.json())
+      .then(data => {
+        const sha = data.sha;
+        return fetch(url, {
+          method: 'PUT',
+          headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, content: encoded, sha })
+        });
+      })
+      .then(function() {
+        var s = document.getElementById('github-status');
+        if (s) { s.textContent = 'Saved to GitHub ✓'; setTimeout(function() { s.textContent = ''; }, 3000); }
+      })
+      .catch(function() {
+        var s = document.getElementById('github-status');
+        if (s) s.textContent = 'GitHub sync failed (check token)';
+      });
+  }
+
   function inject() {
     const main = document.querySelector('main');
     if (!main || document.getElementById('admin-section')) return;
@@ -24,8 +56,26 @@
         '<div class="admin-form-pane" id="pane-work"></div>' +
         '<div class="admin-form-pane" id="pane-now"></div>' +
         '<div class="admin-form-pane" id="pane-legacy"></div>' +
+        '<hr style="margin:2rem 0;border:none;border-top:1px solid var(--line)">' +
+        '<div class="admin-field">' +
+          '<label for="github-token">GitHub Token <span class="admin-optional">(repo scope)</span></label>' +
+          '<input type="password" id="github-token" placeholder="ghp_..." value="' + (gitHubToken() ? '••••••••' : '') + '" />' +
+          '<p class="admin-hint">Posts are saved here and committed to GitHub. Token is stored locally in your browser.</p>' +
+          '<div class="admin-actions" style="margin-top:.5rem">' +
+            '<button type="button" class="admin-submit" id="github-save-btn">Save token</button>' +
+            '<span id="github-status" style="font-family:var(--mono);font-size:.75rem;align-self:center;color:var(--moss)"></span>' +
+          '</div>' +
+        '</div>' +
       '</div>';
     main.appendChild(section);
+
+    document.getElementById('github-save-btn').addEventListener('click', function() {
+      var val = document.getElementById('github-token').value;
+      if (val && val !== '••••••••') {
+        localStorage.setItem('1ma_github_token', val);
+        document.getElementById('github-status').textContent = 'Token saved ✓';
+      }
+    });
 
     const tabs = [
       { id: 'notes', label: 'Notes', form: notesForm() },
@@ -78,6 +128,12 @@
     if (cancel) cancel.remove();
   }
 
+  function commitData(type, data) {
+    var files = { notes: 'notes.json', work: 'work.json', now: 'now.json', legacy: 'legacy.json' };
+    var path = files[type];
+    if (path) commitFile(path, data, 'Update ' + type + ' via admin panel');
+  }
+
   // ── Notes form ──
   function notesForm() {
     const html =
@@ -112,6 +168,7 @@
         document.getElementById('note-date').value = new Date().toISOString().split('T')[0];
         reRenderNotes();
       }
+      commitData('notes', N.data);
     }
     return { html, handler };
   }
@@ -183,6 +240,7 @@
         renderWork();
         refreshNoteTagOptions();
       }
+      commitData('work', W.data);
     }
     return { html, handler };
   }
@@ -237,6 +295,7 @@
         e.target.reset();
         renderNow();
       }
+      commitData('now', O.data);
     }
     return { html, handler };
   }
@@ -290,6 +349,7 @@
         const active = document.querySelector('.legacy-filter.is-selected');
         renderLegacy(active ? active.dataset.platform : 'all');
       }
+      commitData('legacy', window.__legacy.data);
     }
     return { html, handler };
   }
@@ -340,6 +400,7 @@
       N.data = N.data.filter((n) => n.id !== id);
       N.save();
       reRenderNotes();
+      commitData('notes', N.data);
     },
     deleteWork(id) {
       if (!confirm('Delete this work card?')) return;
@@ -347,12 +408,14 @@
       W.save();
       renderWork();
       refreshNoteTagOptions();
+      commitData('work', W.data);
     },
     deleteNow(id) {
       if (!confirm('Delete this now item?')) return;
       O.data = O.data.filter((n) => n.id !== id);
       O.save();
       renderNow();
+      commitData('now', O.data);
     },
     deleteLegacy(id) {
       if (!confirm('Delete this legacy post?')) return;
@@ -360,6 +423,7 @@
       window.__legacy.save();
       const active = document.querySelector('.legacy-filter.is-selected');
       renderLegacy(active ? active.dataset.platform : 'all');
+      commitData('legacy', window.__legacy.data);
     },
   };
 })();

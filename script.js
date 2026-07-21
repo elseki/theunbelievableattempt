@@ -443,17 +443,11 @@ if (window.location.hash === '#1ma-write') {
 
 // ── Init ──
 function initAll() {
-  loadNotes();
-  if (!__work.load()) __work.fetchFrom('work.json').then(() => renderWork());
-  else renderWork();
-  if (!__now.load()) __now.fetchFrom('now.json').then(() => renderNow());
-  else renderNow();
-  if (!__legacy.load()) __legacy.fetchFrom('legacy.json').then(() => renderLegacy('all'));
-  else renderLegacy('all');
-  setTimeout(function() {
-    if (!__legacy.load()) return;
-    var active = document.querySelector('.legacy-filter.is-selected');
-    renderLegacy(active ? active.dataset.platform : 'all');
-  }, 50);
+  Promise.all([
+    fetch('notes.json').then(function(r) { return r.json(); }).then(function(d) { notes = d; __notes.save(); render(); }).catch(function() {}),
+    fetch('work.json').then(function(r) { return r.json(); }).then(function(d) { __work.data = d; __work.save(); renderWork(); }).catch(function() {}),
+    fetch('now.json').then(function(r) { return r.json(); }).then(function(d) { __now.data = d; __now.save(); renderNow(); }).catch(function() {}),
+    fetch('legacy.json').then(function(r) { return r.json(); }).then(function(d) { __legacy.data = d; __legacy.save(); renderLegacy('all'); }).catch(function() {}),
+  ]);
 }
 initAll();
