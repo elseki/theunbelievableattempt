@@ -450,5 +450,10 @@ function initAll() {
   else renderNow();
   if (!__legacy.load()) __legacy.fetchFrom('legacy.json').then(() => renderLegacy('all'));
   else renderLegacy('all');
+  setTimeout(function() {
+    if (!__legacy.load()) return;
+    var active = document.querySelector('.legacy-filter.is-selected');
+    renderLegacy(active ? active.dataset.platform : 'all');
+  }, 50);
 }
 initAll();

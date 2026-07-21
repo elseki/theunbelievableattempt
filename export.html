@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><body><h2>Export localStorage</h2>
+<pre id="out" style="background:#eee;padding:1rem;max-height:80vh;overflow:auto;word-wrap:break-word;white-space:pre-wrap"></pre>
+<button id="copy">Copy all to clipboard</button>
+<script>
+var data = {};
+var keys = ['1ma_notes','1ma_work','1ma_now','1ma_legacy'];
+keys.forEach(k => { var v = localStorage.getItem(k); if (v) data[k] = JSON.parse(v); });
+document.getElementById('out').textContent = JSON.stringify(data, null, 2);
+document.getElementById('copy').onclick = function() {
+  navigator.clipboard.writeText(JSON.stringify(data)).then(function() { alert('Copied!'); });
+};
+</script></body></html>
