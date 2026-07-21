@@ -232,10 +232,11 @@ h1 { font-family: var(--serif); font-size: clamp(4rem, 8.8vw, 8rem); letter-spac
 .now-card h2 { font-family: var(--serif); font-size: clamp(3.4rem, 6vw, 5.5rem); letter-spacing: -.05em; line-height: .84; margin-bottom: 2rem; }
 .now-card-intro > p:last-child { font-family: var(--mono); font-size: .65rem; margin-bottom: 0; opacity: .85; text-transform: uppercase; }
 .now-list { padding-top: 1rem; position: relative; z-index: 2; }
-.now-list div { border-top: 1px solid rgba(255, 253, 250, .45); padding: 1rem 0 1.2rem; }
+.now-list div { border-top: 1px solid rgba(255, 253, 250, .45); padding: .6rem 0 .8rem; }
 .now-list div:last-child { border-bottom: 1px solid rgba(255, 253, 250, .45); }
 .now-list span { color: #ffd2bf; display: block; font-family: var(--mono); font-size: .67rem; margin-bottom: .45rem; text-transform: uppercase; }
 .now-list p { font-size: 1rem; line-height: 1.4; margin: 0; max-width: 375px; }
+.now-list .content-img { margin: .25rem 0; max-width: 240px; }
 .now-scribble { bottom: -11px; color: #ffd2bf; font-family: var(--serif); font-size: 3rem; line-height: .78; position: absolute; right: 4%; transform: rotate(-10deg); transition: transform .4s cubic-bezier(.22, 1, .36, 1); }
 .now-card:hover .now-scribble { transform: rotate(-7deg) translateX(4px); }
 
