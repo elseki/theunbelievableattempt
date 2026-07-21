@@ -1,3 +1,5 @@
+const SITE_VER = 1;
+
 // ── Mobile menu ──
 const menuButton = document.querySelector('.menu-button');
 const siteNav = document.querySelector('.site-nav');
@@ -425,7 +427,7 @@ function afterAdmin() {
 
 if (window.location.hash === '#1ma-write') {
   const s = document.createElement('script');
-  s.src = 'admin.js';
+  s.src = 'admin.js?v=' + SITE_VER;
   s.onload = afterAdmin;
   document.head.appendChild(s);
 } else {
@@ -434,7 +436,7 @@ if (window.location.hash === '#1ma-write') {
     if (window.location.hash === '#1ma-write' && !adminLoaded) {
       adminLoaded = true;
       const s = document.createElement('script');
-      s.src = 'admin.js';
+      s.src = 'admin.js?v=' + SITE_VER;
       s.onload = afterAdmin;
       document.head.appendChild(s);
     }
