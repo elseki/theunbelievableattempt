@@ -174,7 +174,7 @@ h1 { font-family: var(--serif); font-size: clamp(4rem, 8.8vw, 8rem); letter-spac
 
 /* ── Now delete ── */
 .now-list div { position: relative; }
-.now-list .item-actions { align-items: center; display: flex; gap: .15rem; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+.now-list .item-actions { align-items: center; display: flex; gap: .15rem; position: absolute; right: 0; top: .5rem; z-index: 5; }
 .now-delete { background: transparent; border: 0; color: #ffd2bf; cursor: pointer; display: none; font-size: .9rem; padding: .2rem .4rem; transition: color .2s ease; }
 .admin-mode .now-delete { display: block; }
 .admin-mode .now-delete:hover { color: var(--paper); }
