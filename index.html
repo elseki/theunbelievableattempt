@@ -39,7 +39,7 @@
           <h1>One million<br />attempts.<br />Still going.</h1>
           <div class="hero-intro">
             <p>
-              <strong>1 Million Attempts</strong> is a record of everything I’m making, learning,
+              <strong>1 Million Attempts</strong> is a record of everything I'm making, learning,
               trying, and coming back to—one attempt at a time.
             </p>
             <a class="text-link" href="#about">Why one million attempts? <span>↘</span></a>
@@ -52,7 +52,7 @@
 
       <section class="section-shell work-section" id="work" aria-labelledby="work-heading">
         <div class="section-heading">
-          <p class="eyebrow">A few things I’ve made</p>
+          <p class="eyebrow">A few things I've made</p>
           <h2 id="work-heading">Selected work</h2>
           <a class="text-link" href="#contact">See everything <span>↗</span></a>
         </div>
@@ -103,7 +103,7 @@
         <div class="now-card">
           <div class="now-card-intro">
             <p class="eyebrow">A right-now page</p>
-            <h2 id="now-heading">What’s<br />occupying me<br />these days.</h2>
+            <h2 id="now-heading">What's<br />occupying me<br />these days.</h2>
             <p>Last updated July 2025</p>
           </div>
           <div class="now-list" id="now-list"></div>
@@ -121,14 +121,14 @@
           <p class="eyebrow">Nice to meet you</p>
           <h2 id="about-heading">Welcome to<br />1 Million Attempts.</h2>
           <p>
-            This is a place to publish the work I’ve done and the work still ahead—across all my
-            interests, hobbies, and pursuits. It holds the attempts that worked, the ones that didn’t,
-            and the ideas I’ve set aside to return to later.
+            This is a place to publish the work I've done and the work still ahead—across all my
+            interests, hobbies, and pursuits. It holds the attempts that worked, the ones that didn't,
+            and the ideas I've set aside to return to later.
           </p>
           <p>
             If you enjoy seeing people work on what interests them, sharing what they care about, and
-            never giving up, you’re in the right place. It might take one million attempts to reach my
-            dreams—but I won’t stop trying.
+            never giving up, you're in the right place. It might take one million attempts to reach my
+            dreams—but I won't stop trying.
           </p>
           <a class="button-link" href="mailto:onemillionattempts@gmail.com">Say hello <span>↗</span></a>
         </div>
@@ -153,6 +153,165 @@
       </div>
     </footer>
 
-    <script src="script.js?v=1"></script>
+    <!-- Toast -->
+    <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+    <!-- Dialog overlay -->
+    <div id="dialog-overlay" class="dialog-overlay">
+      <div class="dialog-box" role="dialog" aria-labelledby="dialog-title">
+        <h3 id="dialog-title">Edit</h3>
+        <form id="dialog-form">
+          <!-- Note fields -->
+          <div class="extra-fields-note" style="display:none">
+            <label>Title <input type="text" name="dialog_note_title" id="dialog-note-title" required/></label>
+            <label>Content <textarea name="dialog_note_content" id="dialog-note-content"></textarea></label>
+            <label>Category
+              <select name="dialog_note_category" id="dialog-note-category">
+                <option value="thinking">Thinking</option>
+                <option value="making">Making</option>
+                <option value="life">Life lately</option>
+              </select>
+            </label>
+            <label>Tag <input type="text" name="dialog_note_tag" id="dialog-note-tag" placeholder="e.g. pixel-art"/></label>
+            <label>Date <input type="date" name="dialog_note_date" id="dialog-note-date" required/></label>
+          </div>
+          <!-- Work fields -->
+          <div class="extra-fields-work" style="display:none">
+            <label>Number <input type="text" name="dialog_work_number" id="dialog-work-number"/></label>
+            <label>Year <input type="text" name="dialog_work_year" id="dialog-work-year"/></label>
+            <label>Label <input type="text" name="dialog_work_label" id="dialog-work-label"/></label>
+            <label>Title <input type="text" name="dialog_work_title" id="dialog-work-title" required/></label>
+            <label>Description <textarea name="dialog_work_description" id="dialog-work-description"></textarea></label>
+            <label>Link <input type="url" name="dialog_work_link" id="dialog-work-link"/></label>
+            <label>Style
+              <select name="dialog_work_style" id="dialog-work-style">
+                <option value="sunrise">Sunrise</option>
+                <option value="moss">Moss</option>
+                <option value="ember">Ember</option>
+              </select>
+            </label>
+            <label><input type="checkbox" name="dialog_work_large" id="dialog-work-large"/> Large card</label>
+            <label>Quote <input type="text" name="dialog_work_quote" id="dialog-work-quote"/></label>
+            <label>Tag <input type="text" name="dialog_work_tag" id="dialog-work-tag" placeholder="e.g. pixel-art"/></label>
+          </div>
+          <!-- Now fields -->
+          <div class="extra-fields-now" style="display:none">
+            <label>Category <input type="text" name="dialog_now_category" id="dialog-now-category" required/></label>
+            <label>Description <textarea name="dialog_now_description" id="dialog-now-description" required></textarea></label>
+            <label><input type="checkbox" name="dialog_now_italic" id="dialog-now-italic"/> Italic</label>
+          </div>
+          <!-- Legacy fields -->
+          <div class="extra-fields-legacy" style="display:none">
+            <label>Platform
+              <select name="dialog_legacy_platform" id="dialog-legacy-platform">
+                <option value="youtube">YouTube</option>
+                <option value="instagram">Instagram</option>
+                <option value="tiktok">TikTok</option>
+              </select>
+            </label>
+            <label>Title <input type="text" name="dialog_legacy_title" id="dialog-legacy-title" required/></label>
+            <label>Link <input type="url" name="dialog_legacy_link" id="dialog-legacy-link"/></label>
+            <label>Content <textarea name="dialog_legacy_content" id="dialog-legacy-content"></textarea></label>
+            <label>Date <input type="date" name="dialog_legacy_date" id="dialog-legacy-date" required/></label>
+          </div>
+          <div class="dialog-actions">
+            <button type="button" id="dialog-cancel">Cancel</button>
+            <button type="submit" id="dialog-submit">Save</button>
+          </div>
+        </form>
+        <div id="dialog-confirm-delete" style="display:none">
+          <p>Are you sure?</p>
+          <div class="dialog-actions">
+            <button id="dialog-confirm-no">No</button>
+            <button id="dialog-confirm-yes" class="danger">Yes, delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin panel -->
+    <div id="admin-config" class="admin-config">
+      <button id="config-toggle" type="button" aria-label="Toggle admin settings">⚙️ Config</button>
+      <form id="config-form" class="config-form">
+        <label>Supabase URL <input type="url" name="supabase_url" id="supabase_url" placeholder="https://xyz.supabase.co"/></label>
+        <label>Supabase Anon Key <input type="text" name="supabase_key" id="supabase_key" placeholder="anon public key"/></label>
+        <button type="submit">Save & reload</button>
+        <button type="button" id="migrate-btn" style="margin-top:.5rem">Migrate old data → Supabase</button>
+      </form>
+
+      <div class="admin-tabs">
+        <button class="form-tab is-active" data-tab="tab-notes" type="button">Notes</button>
+        <button class="form-tab" data-tab="tab-work" type="button">Work</button>
+        <button class="form-tab" data-tab="tab-now" type="button">Now</button>
+        <button class="form-tab" data-tab="tab-legacy" type="button">Legacy</button>
+      </div>
+
+      <div id="tab-notes" class="tab-pane is-active">
+        <form id="note-form">
+          <label>Title <input type="text" name="title" required/></label>
+          <label>Content <textarea name="content"></textarea></label>
+          <label>Category
+            <select name="category">
+              <option value="thinking">Thinking</option>
+              <option value="making">Making</option>
+              <option value="life">Life lately</option>
+            </select>
+          </label>
+          <label>Tag <select id="note_tag" name="tag"><option value="">None</option></select></label>
+          <label>Date <input type="date" name="date" required/></label>
+          <button type="submit">Add note</button>
+        </form>
+      </div>
+
+      <div id="tab-work" class="tab-pane">
+        <form id="work-form">
+          <label>Number <input type="text" name="number"/></label>
+          <label>Year <input type="text" name="year"/></label>
+          <label>Label <input type="text" name="label"/></label>
+          <label>Title <input type="text" name="title" required/></label>
+          <label>Description <textarea name="description"></textarea></label>
+          <label>Link <input type="url" name="link"/></label>
+          <label>Style
+            <select name="style">
+              <option value="sunrise">Sunrise</option>
+              <option value="moss">Moss</option>
+              <option value="ember">Ember</option>
+            </select>
+          </label>
+          <label><input type="checkbox" name="large"/> Large card</label>
+          <label>Quote <input type="text" name="quote"/></label>
+          <label>Tag <input type="text" name="tag" placeholder="e.g. pixel-art"/></label>
+          <button type="submit">Add work</button>
+        </form>
+      </div>
+
+      <div id="tab-now" class="tab-pane">
+        <form id="now-form">
+          <label>Category <input type="text" name="now_category" required/></label>
+          <label>Description <textarea name="now_description" required></textarea></label>
+          <label><input type="checkbox" name="now_italic"/> Italic</label>
+          <button type="submit">Add now item</button>
+        </form>
+      </div>
+
+      <div id="tab-legacy" class="tab-pane">
+        <form id="legacy-form">
+          <label>Platform
+            <select name="platform">
+              <option value="youtube">YouTube</option>
+              <option value="instagram">Instagram</option>
+              <option value="tiktok">TikTok</option>
+            </select>
+          </label>
+          <label>Title <input type="text" name="title" required/></label>
+          <label>Link <input type="url" name="link"/></label>
+          <label>Content <textarea name="content"></textarea></label>
+          <label>Date <input type="date" name="date" required/></label>
+          <button type="submit">Add legacy post</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script_v2.js"></script>
   </body>
 </html>
