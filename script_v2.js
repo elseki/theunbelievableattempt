@@ -260,7 +260,7 @@ function renderNow() {
   const items = __now.data;
   if (!items.length) { list.innerHTML = ''; return; }
   list.innerHTML = items.map((n) => {
-    const desc = n.italic ? '<p><em>' + n.description + '</em></p>' : '<p>' + n.description + '</p>';
+    const desc = n.italic ? '<p><em>' + n.description.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</em></p>' : renderContent(n.description);
     return '<div style="display:flex;align-items:flex-start;justify-content:space-between">' +
       '<div><span>' + n.category + '</span>' + desc + '</div>' +
       '<div class="item-actions">' +
