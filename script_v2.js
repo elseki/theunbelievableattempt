@@ -181,8 +181,9 @@ document.querySelectorAll('.legacy-filter').forEach((btn) => {
 });
 
 // ── Tag filter ──
-document.getElementById('tag-filter-clear')?.addEventListener('click', () => {
+document.getElementById('tag-filter-clear')?.addEventListener('click', function() {
   activeTag = '';
+  renderWork();
   document.querySelector('.filter-button.is-selected')?.click();
 });
 
@@ -197,22 +198,20 @@ document.querySelectorAll('.filter-button').forEach((button) => {
 // ── Work renderer ──
 function renderWork() {
   const grid = document.getElementById('work-grid');
-  const items = __work.data;
+  var items = __work.data;
+  if (activeTag) items = items.filter(function(w) { return w.tag === activeTag; });
   if (!items.length) { grid.innerHTML = ''; return; }
-  grid.innerHTML = items.map((w) => {
-    const cls = 'project-card' + (w.large ? ' project-card-large' : '') + ' project-' + w.style;
-    let extra = '';
+  grid.innerHTML = items.map(function(w) {
+    var cls = 'project-card' + (w.large ? ' project-card-large' : '') + ' project-' + w.style;
+    var extra = '';
     if (w.style === 'sunrise') {
       extra = '<div class="project-orbit" aria-hidden="true">\u2736</div>';
     } else if (w.style === 'moss') {
       extra = '<div class="moss-shape moss-one" aria-hidden="true"></div><div class="moss-shape moss-two" aria-hidden="true"></div>';
     }
-    const hasExternal = w.link && w.link !== '#work' && w.link !== '';
-    const href = w.tag && !hasExternal ? '#notes' : (w.link || '#work');
-    const target = hasExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
-    const tagAttr = w.tag && !hasExternal ? ' data-tag="' + w.tag + '"' : '';
+    var tagAttr = w.tag ? ' data-tag="' + w.tag + '"' : '';
     return '<article class="' + cls + '">' +
-      '<a href="' + href + '"' + target + tagAttr + ' aria-label="Explore ' + w.title + '">' +
+      '<a href="#notes"' + tagAttr + ' aria-label="Explore ' + w.title + '">' +
         '<div class="card-topline"><span>' + w.number + '</span><span>' + w.year + '</span></div>' +
         extra + (w.quote ? '<p class="project-quote">\u201c' + w.quote + '\u201d</p>' : '') +
         '<div class="card-copy">' +
@@ -229,25 +228,26 @@ function renderWork() {
     '</article>';
   }).join('');
 
-  document.querySelectorAll('.work-delete').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
+  document.querySelectorAll('.work-delete').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
       e.stopPropagation();
       if (window.__admin) window.__admin.deleteWork(btn.dataset.id);
     });
   });
 
-  document.querySelectorAll('.work-edit').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
+  document.querySelectorAll('.work-edit').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
       e.stopPropagation();
       if (window.__admin) window.__admin.editWork(btn.dataset.id);
     });
   });
 
-  document.querySelectorAll('#work-grid a[data-tag]').forEach((link) => {
-    link.addEventListener('click', (e) => {
+  document.querySelectorAll('#work-grid a[data-tag]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
       e.preventDefault();
       activeTag = link.dataset.tag;
-      document.querySelectorAll('.filter-button').forEach((b) => b.classList.toggle('is-selected', b.dataset.filter === 'all'));
+      document.querySelectorAll('.filter-button').forEach(function(b) { b.classList.toggle('is-selected', b.dataset.filter === 'all'); });
+      renderWork();
       renderNotes('all');
       document.getElementById('notes')?.scrollIntoView({ behavior: 'smooth' });
     });

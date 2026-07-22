@@ -172,7 +172,7 @@
                 <option value="life">Life lately</option>
               </select>
             </label>
-            <label>Tag <input type="text" name="dialog_note_tag" id="dialog-note-tag" placeholder="e.g. pixel-art"/></label>
+            <label>Tag <input type="text" name="dialog_note_tag" id="dialog-note-tag" list="tag-datalist" placeholder="e.g. pixel-art"/></label>
             <label>Date <input type="date" name="dialog_note_date" id="dialog-note-date" required/></label>
           </div>
           <!-- Work fields -->
@@ -182,7 +182,6 @@
             <label>Label <input type="text" name="dialog_work_label" id="dialog-work-label"/></label>
             <label>Title <input type="text" name="dialog_work_title" id="dialog-work-title" required/></label>
             <label>Description <textarea name="dialog_work_description" id="dialog-work-description"></textarea></label>
-            <label>Link <input type="url" name="dialog_work_link" id="dialog-work-link"/></label>
             <label>Style
               <select name="dialog_work_style" id="dialog-work-style">
                 <option value="sunrise">Sunrise</option>
@@ -192,7 +191,7 @@
             </label>
             <label><input type="checkbox" name="dialog_work_large" id="dialog-work-large"/> Large card</label>
             <label>Quote <input type="text" name="dialog_work_quote" id="dialog-work-quote"/></label>
-            <label>Tag <input type="text" name="dialog_work_tag" id="dialog-work-tag" placeholder="e.g. pixel-art"/></label>
+            <label>Tag <input type="text" name="dialog_work_tag" id="dialog-work-tag" list="tag-datalist" placeholder="e.g. pixel-art"/></label>
           </div>
           <!-- Now fields -->
           <div class="extra-fields-now" style="display:none">
@@ -257,7 +256,7 @@
               <option value="life">Life lately</option>
             </select>
           </label>
-          <label>Tag <select id="note_tag" name="tag"><option value="">None</option></select></label>
+          <label>Tag <input type="text" name="tag" list="tag-datalist" placeholder="e.g. pixel-art"/></label>
           <label>Date <input type="date" name="date" required/></label>
           <button type="submit">Add note</button>
         </form>
@@ -270,7 +269,6 @@
           <label>Label <input type="text" name="label"/></label>
           <label>Title <input type="text" name="title" required/></label>
           <label>Description <textarea name="description"></textarea></label>
-          <label>Link <input type="url" name="link"/></label>
           <label>Style
             <select name="style">
               <option value="sunrise">Sunrise</option>
@@ -280,7 +278,7 @@
           </label>
           <label><input type="checkbox" name="large"/> Large card</label>
           <label>Quote <input type="text" name="quote"/></label>
-          <label>Tag <input type="text" name="tag" placeholder="e.g. pixel-art"/></label>
+          <label>Tag <input type="text" name="tag" list="tag-datalist" placeholder="e.g. pixel-art"/></label>
           <button type="submit">Add work</button>
         </form>
       </div>
@@ -312,6 +310,7 @@
       </div>
     </div>
 
+    <datalist id="tag-datalist"></datalist>
     <script src="script_v2.js"></script>
   </body>
 </html>

@@ -181,34 +181,28 @@ document.getElementById('note-form').addEventListener('submit', function(e) {
   });
 });
 
-function populateTagDropdown() {
-  var sel = document.getElementById('note_tag');
-  if (!sel) return;
-  var current = sel.value;
-  sel.innerHTML = '<option value="">None</option>';
+function populateTagDatalist() {
+  var dl = document.getElementById('tag-datalist');
+  if (!dl) return;
   var seen = {};
-  __work.data.forEach(function(w) {
-    if (w.tag && !seen[w.tag]) {
-      seen[w.tag] = true;
-      var opt = document.createElement('option');
-      opt.value = w.tag;
-      opt.textContent = w.tag;
-      sel.appendChild(opt);
-    }
-  });
-  if (current) sel.value = current;
+  __work.data.forEach(function(w) { if (w.tag) seen[w.tag] = true; });
+  notes.forEach(function(n) { if (n.tag) seen[n.tag] = true; });
+  dl.innerHTML = Object.keys(seen).sort().map(function(t) { return '<option value="' + t.replace(/"/g,'&quot;') + '">'; }).join('');
 }
 
 // ── Delete ──
 window.__admin = {
   init: function() {
-    populateTagDropdown();
+    populateTagDatalist();
     document.getElementById('supabase_url').value = localStorage.getItem('1ma_supabase_url') || '';
     document.getElementById('supabase_key').value = localStorage.getItem('1ma_supabase_key') || '';
-    // Refresh tag dropdown when work changes
+    // Refresh tag list when work changes
     var origRenderWork = renderWork;
-    var self = this;
-    renderWork = function() { origRenderWork(); populateTagDropdown(); };
+    renderWork = function() { origRenderWork(); populateTagDatalist(); };
+    var origRenderNotes = renderNotes;
+    var origRender = render;
+    render = function() { origRender(); populateTagDatalist(); };
+    renderNotes = function(f) { origRenderNotes(f); populateTagDatalist(); };
   },
 
   editNote: function(id) {
@@ -240,7 +234,6 @@ window.__admin = {
     dialogForm.querySelector('#dialog-work-label').value = w.label || '';
     dialogForm.querySelector('#dialog-work-title').value = w.title || '';
     dialogForm.querySelector('#dialog-work-description').value = w.description || '';
-    dialogForm.querySelector('#dialog-work-link').value = w.link || '';
     dialogForm.querySelector('#dialog-work-style').value = w.style || 'sunrise';
     dialogForm.querySelector('#dialog-work-large').checked = !!w.large;
     dialogForm.querySelector('#dialog-work-quote').value = w.quote || '';
@@ -402,7 +395,6 @@ dialogForm.addEventListener('submit', function(e) {
       label: fd.get('dialog_work_label'),
       title: fd.get('dialog_work_title'),
       description: fd.get('dialog_work_description'),
-      link: fd.get('dialog_work_link'),
       style: fd.get('dialog_work_style'),
       large: fd.get('dialog_work_large') === 'on',
       quote: fd.get('dialog_work_quote'),
