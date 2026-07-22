@@ -1,3 +1,5 @@
+drop table if exists notes, work, legacy, now, posts, projects, links;
+
 create table posts (
   id text primary key,
   title text not null,
